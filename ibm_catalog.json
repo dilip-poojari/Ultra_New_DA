@@ -1,0 +1,233 @@
+{
+  "products": [
+    {
+      "name": "openshift-ai-roks-da",
+      "label": "OpenShift AI on ROKS",
+      "product_kind": "solution",
+      "tags": [
+        "dev_ops",
+        "target_terraform",
+        "terraform",
+        "ibm_created",
+        "openshift",
+        "ai_ml",
+        "data_science"
+      ],
+      "keywords": [
+        "openshift",
+        "ai",
+        "machine learning",
+        "data science",
+        "roks",
+        "vpc",
+        "kubernetes",
+        "rhods",
+        "jupyter",
+        "notebooks"
+      ],
+      "short_description": "Deploy Red Hat OpenShift AI (RHODS) on IBM Cloud ROKS with complete infrastructure",
+      "long_description": "This Deployable Architecture provides a complete solution for deploying Red Hat OpenShift AI (formerly Red Hat OpenShift Data Science) on Red Hat OpenShift on IBM Cloud (ROKS). It includes VPC infrastructure, multi-zone ROKS cluster, OpenShift Data Foundation (ODF) storage, and OpenShift AI with notebook and model serving capabilities. Optional IBM Cloud Logs and Monitoring integration is available for observability.",
+      "offering_docs_url": "https://github.com/dilip-poojari/Ultra_New_DA/blob/main/README.md",
+      "offering_icon_url": "https://raw.githubusercontent.com/IBM-Cloud/terraform-provider-ibm/master/images/openshift_logo.svg",
+      "provider_name": "IBM",
+      "features": [
+        {
+          "title": "Multi-Zone High Availability",
+          "description": "Deploys resources across 3 availability zones for high availability and fault tolerance"
+        },
+        {
+          "title": "OpenShift Data Foundation",
+          "description": "Integrated storage solution with block, file, and object storage for AI/ML workloads"
+        },
+        {
+          "title": "Complete AI/ML Platform",
+          "description": "Includes Jupyter notebooks, model serving (KServe/ModelMesh), pipelines, and monitoring"
+        },
+        {
+          "title": "Enterprise Security",
+          "description": "VPC isolation, security groups, optional encryption, and RBAC controls"
+        },
+        {
+          "title": "Observability Ready",
+          "description": "Optional integration with IBM Cloud Logs and Monitoring for comprehensive observability"
+        }
+      ],
+      "flavors": [
+        {
+          "label": "Basic",
+          "name": "basic",
+          "working_directory": "examples/basic",
+          "architecture": {
+            "descriptions": "Basic deployment with standard configuration",
+            "features": [
+              {
+                "title": "VPC Infrastructure",
+                "description": "3-zone VPC with subnets and public gateways"
+              },
+              {
+                "title": "ROKS Cluster",
+                "description": "OpenShift 4.14 with 6 worker nodes (2 per zone)"
+              },
+              {
+                "title": "OpenShift AI",
+                "description": "Full OpenShift AI installation with all components"
+              }
+            ],
+            "diagrams": [
+              {
+                "diagram": {
+                  "caption": "OpenShift AI on ROKS Architecture",
+                  "url": "https://raw.githubusercontent.com/dilip-poojari/Ultra_New_DA/main/architecture-diagram.svg",
+                  "type": "image/svg+xml"
+                },
+                "description": "Architecture diagram showing VPC, ROKS cluster, ODF storage, and OpenShift AI components"
+              }
+            ]
+          },
+          "configuration": [
+            {
+              "key": "ibmcloud_api_key",
+              "type": "password",
+              "description": "IBM Cloud API key for authentication",
+              "required": true,
+              "hidden": false
+            },
+            {
+              "key": "region",
+              "type": "string",
+              "default_value": "us-south",
+              "description": "IBM Cloud region where resources will be deployed",
+              "required": true,
+              "options": [
+                {
+                  "displayname": "US South (Dallas)",
+                  "value": "us-south"
+                },
+                {
+                  "displayname": "US East (Washington DC)",
+                  "value": "us-east"
+                },
+                {
+                  "displayname": "EU Germany (Frankfurt)",
+                  "value": "eu-de"
+                },
+                {
+                  "displayname": "EU Great Britain (London)",
+                  "value": "eu-gb"
+                },
+                {
+                  "displayname": "Japan (Tokyo)",
+                  "value": "jp-tok"
+                },
+                {
+                  "displayname": "Australia (Sydney)",
+                  "value": "au-syd"
+                }
+              ]
+            },
+            {
+              "key": "resource_group_id",
+              "type": "string",
+              "description": "ID of the resource group where resources will be created",
+              "required": true
+            },
+            {
+              "key": "prefix",
+              "type": "string",
+              "default_value": "openshift-ai",
+              "description": "Prefix for naming all resources",
+              "required": true
+            },
+            {
+              "key": "openshift_version",
+              "type": "string",
+              "default_value": "4.14_openshift",
+              "description": "OpenShift version to deploy",
+              "required": true
+            },
+            {
+              "key": "worker_pool_flavor",
+              "type": "string",
+              "default_value": "bx2.16x64",
+              "description": "Machine type for worker nodes",
+              "required": true,
+              "options": [
+                {
+                  "displayname": "bx2.16x64 (16 vCPU, 64 GB RAM)",
+                  "value": "bx2.16x64"
+                },
+                {
+                  "displayname": "bx2.32x128 (32 vCPU, 128 GB RAM)",
+                  "value": "bx2.32x128"
+                },
+                {
+                  "displayname": "bx2.48x192 (48 vCPU, 192 GB RAM)",
+                  "value": "bx2.48x192"
+                }
+              ]
+            },
+            {
+              "key": "workers_per_zone",
+              "type": "number",
+              "default_value": 2,
+              "description": "Number of worker nodes per zone (minimum 2 for HA)",
+              "required": true
+            },
+            {
+              "key": "enable_observability",
+              "type": "boolean",
+              "default_value": false,
+              "description": "Enable IBM Cloud Logs and Monitoring integration",
+              "required": false
+            }
+          ],
+          "outputs": [
+            {
+              "key": "cluster_id",
+              "description": "ID of the OpenShift cluster"
+            },
+            {
+              "key": "cluster_name",
+              "description": "Name of the OpenShift cluster"
+            },
+            {
+              "key": "cluster_ingress_hostname",
+              "description": "Ingress hostname for the cluster"
+            },
+            {
+              "key": "openshift_ai_dashboard_url",
+              "description": "URL for OpenShift AI dashboard"
+            },
+            {
+              "key": "deployment_summary",
+              "description": "Summary of the deployed architecture"
+            }
+          ],
+          "iam_permissions": [
+            {
+              "service_name": "is",
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ]
+            },
+            {
+              "service_name": "containers-kubernetes",
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::role:Administrator"
+              ]
+            }
+          ],
+          "compliance": {
+            "authority": "scc-v3",
+            "profiles": [
+              {
+                "profile_name": "IBM Cloud Framework for Financial Services",
+                "profile_version": "1.5.0"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
