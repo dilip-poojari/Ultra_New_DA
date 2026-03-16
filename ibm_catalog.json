@@ -1,14 +1,13 @@
 {
   "products": [
     {
-      "name": "openshift-ai-roks-da",
+      "name": "deploy-arch-ibm-openshift-ai-roks",
       "label": "OpenShift AI on ROKS",
       "product_kind": "solution",
       "tags": [
         "dev_ops",
         "target_terraform",
         "terraform",
-        "ibm_created",
         "openshift",
         "ai_ml",
         "data_science"
@@ -23,13 +22,16 @@
         "kubernetes",
         "rhods",
         "jupyter",
-        "notebooks"
+        "notebooks",
+        "IaC",
+        "infrastructure as code",
+        "terraform"
       ],
       "short_description": "Deploy Red Hat OpenShift AI (RHODS) on IBM Cloud ROKS with complete infrastructure",
       "long_description": "This Deployable Architecture provides a complete solution for deploying Red Hat OpenShift AI (formerly Red Hat OpenShift Data Science) on Red Hat OpenShift on IBM Cloud (ROKS). It includes VPC infrastructure, multi-zone ROKS cluster, OpenShift Data Foundation (ODF) storage, and OpenShift AI with notebook and model serving capabilities. Optional IBM Cloud Logs and Monitoring integration is available for observability.",
       "offering_docs_url": "https://github.com/dilip-poojari/Ultra_New_DA/blob/main/README.md",
       "offering_icon_url": "https://raw.githubusercontent.com/IBM-Cloud/terraform-provider-ibm/master/images/openshift_logo.svg",
-      "provider_name": "IBM",
+      "provider_name": "Community",
       "features": [
         {
           "title": "Multi-Zone High Availability",
@@ -54,11 +56,11 @@
       ],
       "flavors": [
         {
-          "label": "Basic",
-          "name": "basic",
-          "working_directory": "examples/basic",
+          "label": "Standard",
+          "name": "standard",
+          "working_directory": ".",
           "architecture": {
-            "descriptions": "Basic deployment with standard configuration",
+            "description": "Standard deployment with HA configuration across 3 zones",
             "features": [
               {
                 "title": "VPC Infrastructure",
@@ -73,16 +75,7 @@
                 "description": "Full OpenShift AI installation with all components"
               }
             ],
-            "diagrams": [
-              {
-                "diagram": {
-                  "caption": "OpenShift AI on ROKS Architecture",
-                  "url": "https://raw.githubusercontent.com/dilip-poojari/Ultra_New_DA/main/architecture-diagram.svg",
-                  "type": "image/svg+xml"
-                },
-                "description": "Architecture diagram showing VPC, ROKS cluster, ODF storage, and OpenShift AI components"
-              }
-            ]
+            "diagrams": []
           },
           "configuration": [
             {
